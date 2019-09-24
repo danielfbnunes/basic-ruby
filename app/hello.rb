@@ -1,19 +1,15 @@
 # frozen_string_literal: true
 
-# def json_params
-#   begin
-    
-#   rescue
-#     halt 400, {message: 'Invalid JSON'}.to_json
-#   end
-# end
-    
 get '/' do
   Database.all.to_json
 end
 
 get '/:id' do
   Database.find(params[:id]).to_json
+end
+
+get '/list/:page' do
+  Database.list(params[:page].to_i).to_json
 end
 
 put '/replace/:id' do

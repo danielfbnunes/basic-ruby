@@ -8,6 +8,13 @@ module Database
     @contacts.keys.map{ |id| get_mapped_contact(id) }
   end
 
+  def list(page)
+    x_bound = page * 20
+    y_bound = x_bound + 20
+    contacts_range = @contacts.keys[x_bound...y_bound]
+    contacts_range.nil? ? [] : contacts_range.map{ |id| get_mapped_contact(id) }
+  end
+
   def find(input_id)
     id = @contacts.keys.find{ |id| input_id == id}
     get_mapped_contact(id)
