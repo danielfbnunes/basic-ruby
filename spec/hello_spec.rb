@@ -10,9 +10,14 @@ RSpec.describe 'hello app' do
     Sinatra::Application
   end
 
-  it 'says hi' do
-    get '/'
+  describe "GET / with zero elements added" do
+    before do
+      get '/'
+    end
 
-    expect(last_response).to be_ok
+    it 'return empty on when there are no records' do
+      json_response = JSON.parse(last_response.body)
+      expect(json_response).to match_array([])
+    end
   end
 end
